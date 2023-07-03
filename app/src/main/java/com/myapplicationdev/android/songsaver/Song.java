@@ -1,5 +1,7 @@
 package com.myapplicationdev.android.songsaver;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by Nuur Aisyah Binte Farouk on 3/7/2023.
  * C346-1D-E63A-A
@@ -7,7 +9,7 @@ package com.myapplicationdev.android.songsaver;
 public class Song {
 
 
-    int _id;
+    int id;
     String title;
     String singers;
     int year;
@@ -20,8 +22,8 @@ public class Song {
         this.stars = stars;
     }
 
-    public int get_id() {
-        return _id;
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -39,4 +41,10 @@ public class Song {
     public int getStars() {
         return stars;
     }
+
+    @NonNull
+    @Override
+
+    public String toString() {
+        return  "Title: " + title + "\nSingers: " + singers+ "\nReleased: " + year+ "\nRating: " + stars;}
 }

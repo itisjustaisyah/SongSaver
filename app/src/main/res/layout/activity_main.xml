@@ -28,7 +28,9 @@
             android:hint="@string/enter_song_title_here"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:selectAllOnFocus="false"
+            android:singleLine="false" />
     </LinearLayout>
 
     <LinearLayout
@@ -96,7 +98,10 @@
             android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:max="5"
+            android:stepSize="0" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/stars"
+            android:text="@string/insert"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -116,6 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@string/show_list"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 
