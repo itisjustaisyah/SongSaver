@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Song Saver</string>
+    <string name="stars">Stars</string>
+    <string name="year">Year</string>
+    <string name="singers">Singers</string>
+    <string name="enter_singers_name_here">Enter singers\' name here</string>
+    <string name="song_title">Song Title</string>
+    <string name="enter_song_title_here">Enter song title here</string>
+    <string name="enter_year_of_release_here">Enter year of release here</string>
+</resources>
