@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -20,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        show = findViewById(R.id.show);
+        show = findViewById(R.id.showList);
         insert = findViewById(R.id.insert);
 
         editTitle = findViewById(R.id.editTitle);
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         insert.setOnClickListener(v -> {
             String title = editTitle.getText().toString();
             String singers = editSingers.getText().toString();
-            String year = editYear.getText().toString();
+            int year = Integer.parseInt(editYear.getText().toString());
             int stars = (int) rating.getRating();
 
             Log.i("MainActivity.java", title + ", " + singers + ", " + year + ", " + stars + ", ");
@@ -46,19 +45,17 @@ public class MainActivity extends AppCompatActivity {
             } if(singers.isEmpty()){
                 editSingers.setError("Cannot be empty");
                 valid = false;
-            } if (year.isEmpty()){
+            } if (year<0){
                 editYear.setError("Cannot be empty");
                 valid = false;
             }
             if(valid) {
-                db.insertTask(title, singers, Integer.parseInt(year), stars);
+                db.insertSong(new Song (title, singers, year, stars));
                 Log.i("insert Main Activty", "inserted successfully");
                 Toast.makeText(this, "Inserted Song Successfully", Toast.LENGTH_SHORT).show();
             }
         });
-        show.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ShowSongListActivity.class));
-        });
+        show.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ShowSongListActivity.class)));
 
 
 

@@ -39,6 +39,7 @@ public class DBHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             Log.i("cursor", "moveToFirst() false");
             do {
+                int id = cursor.getInt(0);
                 String title = cursor.getString(1);
                 String singers = cursor.getString(2);
                 int year = cursor.getInt(3);
@@ -52,7 +53,31 @@ public class DBHelper extends SQLiteOpenHelper{
         return songs;
     }
 
+    public ArrayList<Song> getSongs(String singer) {
+        ArrayList<Song> songs = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS,COLUMN_YEAR,COLUMN_STARS};
+        String condition = COLUMN_SINGERS + " Like ?";
+        String[] args = {"%" + singer + "%"};
 
+        Cursor cursor = db.query(TABLE_SONGS, columns, condition, args, null, null, COLUMN_TITLE + " asc", null);
+
+        if (cursor.moveToFirst()) {
+            Log.i("cursor", "moveToFirst() false");
+            do {
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String singers = cursor.getString(2);
+                int year = cursor.getInt(3);
+                int stars = cursor.getInt(4);
+                Song obj = new Song(title,singers, year, stars);
+                songs.add(obj);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return songs;
+    }
 
 
     public DBHelper(Context context) {
@@ -80,25 +105,47 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
-    public void insertTask(String description, String date, int year, int stars){
+    public void insertSong(Song data){
         // Get an instance of the database for writing
         SQLiteDatabase db = this.getWritableDatabase();
         // We use ContentValues object to store the values for
         //  the db operation
         ContentValues values = new ContentValues();
         // Store the column name as key and the description as value
-        values.put(COLUMN_TITLE, description);
+        values.put(COLUMN_TITLE, data.getTitle());
         // Store the column name as key and the date as value
-        values.put(COLUMN_SINGERS, date);
+        values.put(COLUMN_SINGERS, data.getSingers());
         // Insert the row into the TABLE_TASK
-        values.put(COLUMN_YEAR, year);
+        values.put(COLUMN_YEAR, data.getYear());
         // Insert the row into the TABLE_TASK
-        values.put(COLUMN_STARS, stars);
+        values.put(COLUMN_STARS, data.getStars());
         // Insert the row into the TABLE_TASK
         db.insert(TABLE_SONGS, null, values);
         // Close the database connection
-        Log.i("info", "Task inserted");
+        Log.i("info", "Song inserted");
         db.close();
 
+    }
+
+    public int updateSong(Song data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, data.getTitle());
+        // Store the column name as key and the date as value
+        values.put(COLUMN_SINGERS, data.getSingers());
+        // Insert the row into the TABLE_TASK
+        values.put(COLUMN_YEAR, data.getYear());
+        // Insert the row into the TABLE_TASK
+        values.put(COLUMN_STARS, data.getStars());
+        String condition = COLUMN_ID + "+ ?";
+        String[] args = {String.valueOf(data.getId())};
+        return db.update(TABLE_SONGS, values, condition, args);
+    }
+
+    public int deleteSong(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(id)};
+        return db.delete(TABLE_SONGS, condition, args);
     }
 }

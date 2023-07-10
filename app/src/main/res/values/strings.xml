@@ -9,4 +9,11 @@
     <string name="enter_year_of_release_here">Enter year of release here</string>
     <string name="insert">Insert</string>
     <string name="show_list">Show list</string>
+    <string name="song_id">Song ID</string>
+    <string name="update">Update</string>
+    <string name="cancel">CANCEL</string>
+    <string name="delete">Delete</string>
+    <string name="_4">4</string>
+    <string name="show_all_songs_with_5_stars">SHOW ALL SONGS WITH 5 STARS</string>
+    <string name="back">BACK</string>
 </resources>

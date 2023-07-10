@@ -4,9 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".EditSongsActivity"
     android:layout_margin="15dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/songID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/song_id"
+            android:labelFor="@id/editID"/>
+
+        <EditText
+            android:id="@+id/editID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:enabled="false"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:text="@string/_4" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,10 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/song_title"
-            android:labelFor="@id/editTitle"/>
+            android:labelFor="@id/updateTitle"/>
 
         <EditText
-            android:id="@+id/editTitle"
+            android:id="@+id/updateTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -31,11 +55,8 @@
             android:inputType="text"
             android:minHeight="48dp"
             android:selectAllOnFocus="false"
-            android:singleLine="false"
-            android:textColorHint="#A1887F"
-            tools:ignore="LabelFor" />
+            android:singleLine="false" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,10 +68,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/singers"
-            android:labelFor="@id/editSingers"/>
+            android:labelFor="@id/updateSingers"/>
 
         <EditText
-            android:id="@+id/editSingers"
+            android:id="@+id/updateSingers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -58,12 +79,9 @@
             android:hint="@string/enter_singers_name_here"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:minHeight="48dp"
-            android:textColorHint="#A1887F"
-            tools:ignore="LabelFor" />
+            android:minHeight="48dp" />
 
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,10 +93,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/year"
-            android:labelFor="@id/editYear"/>
+            android:labelFor="@id/updateYear"/>
 
         <EditText
-            android:id="@+id/editYear"
+            android:id="@+id/updateYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -86,11 +104,8 @@
             android:hint="@string/enter_year_of_release_here"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:minHeight="48dp"
-            android:textColorHint="#A1887F"
-            tools:ignore="LabelFor" />
+            android:minHeight="48dp" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,37 +117,54 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/stars"
-            android:labelFor="@id/rating"/>
+            android:labelFor="@id/updateRating"/>
 
         <RatingBar
-            android:id="@+id/rating"
+            android:id="@+id/updateRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:max="5"
-            android:stepSize="0" />
+            android:stepSize="0"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <Button
-            android:id="@+id/insert"
-            android:layout_width="wrap_content"
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/insert"
-            tools:ignore="ButtonStyle,VisualLintButtonSize" />
-
-        <Button
-            android:id="@+id/showList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/show_list"
+            android:text="@string/cancel"
             tools:ignore="ButtonStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/update"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/delete"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
