@@ -1,5 +1,7 @@
 package com.myapplicationdev.android.songsaver;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
@@ -22,6 +24,10 @@ public class Song implements Serializable {
         this.singers = singers;
         this.year = year;
         this.stars = stars;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

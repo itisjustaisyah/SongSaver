@@ -53,12 +53,12 @@ public class DBHelper extends SQLiteOpenHelper{
         return songs;
     }
 
-    public ArrayList<Song> getSongs(String singer) {
+    public ArrayList<Song> getSongs(int rating) {
         ArrayList<Song> songs = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS,COLUMN_YEAR,COLUMN_STARS};
-        String condition = COLUMN_SINGERS + " Like ?";
-        String[] args = {"%" + singer + "%"};
+        String condition = COLUMN_STARS + " Like ?";
+        String[] args = {"%" + rating + "%"};
 
         Cursor cursor = db.query(TABLE_SONGS, columns, condition, args, null, null, COLUMN_TITLE + " asc", null);
 
@@ -106,10 +106,11 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
     public void insertSong(Song data){
-        // Get an instance of the database for writing
-        SQLiteDatabase db = this.getWritableDatabase();
-        // We use ContentValues object to store the values for
-        //  the db operation
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS,COLUMN_YEAR,COLUMN_STARS};
+        Cursor cursor = db.query(TABLE_SONGS, columns, null, null, null, null, COLUMN_TITLE + " asc", null);
+
+        cursor.moveToLast();
         ContentValues values = new ContentValues();
         // Store the column name as key and the description as value
         values.put(COLUMN_TITLE, data.getTitle());
@@ -124,20 +125,25 @@ public class DBHelper extends SQLiteOpenHelper{
         // Close the database connection
         Log.i("info", "Song inserted");
         db.close();
+        // Get an instance of the database for writing
+        // We use ContentValues object to store the values for
+        //  the db operation
+        cursor.close();
+        db.close();
 
     }
 
-    public int updateSong(Song data) {
+    public int updateSong(Song data, Song updatedData) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TITLE, data.getTitle());
+        values.put(COLUMN_TITLE, updatedData.getTitle());
         // Store the column name as key and the date as value
-        values.put(COLUMN_SINGERS, data.getSingers());
+        values.put(COLUMN_SINGERS, updatedData.getSingers());
         // Insert the row into the TABLE_TASK
-        values.put(COLUMN_YEAR, data.getYear());
+        values.put(COLUMN_YEAR, updatedData.getYear());
         // Insert the row into the TABLE_TASK
-        values.put(COLUMN_STARS, data.getStars());
-        String condition = COLUMN_ID + "+ ?";
+        values.put(COLUMN_STARS, updatedData.getStars());
+        String condition = COLUMN_ID + "= ?";
         String[] args = {String.valueOf(data.getId())};
         return db.update(TABLE_SONGS, values, condition, args);
     }

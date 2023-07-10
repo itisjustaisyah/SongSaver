@@ -12,11 +12,14 @@
         android:layout_height="wrap_content"
         android:text="@string/back" />
 
-    <Button
-        android:id="@+id/fiveStars"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/show_all_songs_with_5_stars" />
+    <ToggleButton
+            android:id="@+id/fiveStars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_all_songs_with_5_stars"
+            android:checked="false"
+            android:textOff="@string/show_all_songs_with_5_stars"
+            android:textOn="@string/show_all_songs_with_5_stars" />
 
     <Spinner
         android:id="@+id/yearSpinner"

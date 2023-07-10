@@ -58,10 +58,16 @@ public class EditSongsActivity extends AppCompatActivity {
                 valid = false;
             }
             if(valid) {
-                dbh.insertSong(new Song(title, singers, year, stars));
-                Log.i("Main Activity", "inserted successfully");
-                Toast.makeText(this, "Inserted Song Successfully", Toast.LENGTH_SHORT).show();
+                if(dbh.updateSong(data ,new Song(title, singers, year, stars)) < 1){
+                    Log.i("Edit Activity", "update unsuccessful");
+
+                }else{
+                    Log.i("Edit Activity", "update successfully");
+                }
+
+                Toast.makeText(this, "Updated Song Successfully", Toast.LENGTH_SHORT).show();
             }
+            startActivity(new Intent(EditSongsActivity.this, ShowSongListActivity.class));
         });
         cancel.setOnClickListener(v -> startActivity(new Intent(EditSongsActivity.this, ShowSongListActivity.class)));
         delete.setOnClickListener(v -> {
@@ -70,32 +76,7 @@ public class EditSongsActivity extends AppCompatActivity {
             Log.i("Edit Activty", "Deleted successfully");
             Toast.makeText(this, "Deleted Song Successfully", Toast.LENGTH_SHORT).show();
         });
-        update.setOnClickListener(v -> {
-            String title = updateTitle.getText().toString();
-            String singers = updateSingers.getText().toString();
-            int year = Integer.parseInt(updateYear.getText().toString());
-            int stars = (int) updateRating.getRating();
 
-            Log.i("MainActivity.java", title + ", " + singers + ", " + year + ", " + stars + ", ");
-            boolean valid = true;
-
-            if(title.isEmpty()){
-                updateTitle.setError("Cannot be empty");
-                valid = false;
-            } if(singers.isEmpty()){
-                updateSingers.setError("Cannot be empty");
-                valid = false;
-            } if (year < 0){
-                updateYear.setError("Cannot be empty");
-                valid = false;
-            }
-            if(valid) {
-                dbh.updateSong(new Song(title, singers, year, stars));
-                Log.i("Edit Activty", "update successfully");
-                Toast.makeText(this, "Updated Song Successfully", Toast.LENGTH_SHORT).show();
-            }
-            startActivity(new Intent(EditSongsActivity.this, ShowSongListActivity.class));
-        });
     }
 
     @Override
