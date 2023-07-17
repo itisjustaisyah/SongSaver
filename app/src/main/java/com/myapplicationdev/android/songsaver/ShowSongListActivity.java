@@ -21,7 +21,8 @@ public class ShowSongListActivity extends AppCompatActivity {
     ArrayList<Song> al;
 
     DBHelper dbh;
-    ArrayAdapter<?> aa;
+    //    ArrayAdapter<?> aa;
+    CustomAdapter aa;
 
 
 
@@ -36,7 +37,8 @@ public class ShowSongListActivity extends AppCompatActivity {
 
         dbh = new DBHelper(ShowSongListActivity.this);
         al = dbh.getSongs();
-        aa = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, al);
+//        aa = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, al);
+        aa = new CustomAdapter(this, R.layout.row, al);
 
         listview.setAdapter(aa);
         retrieveSongs();
@@ -75,6 +77,7 @@ public class ShowSongListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         retrieveSongs();
+        aa.notifyDataSetChanged();
     }
 
     public void retrieveSongs() {

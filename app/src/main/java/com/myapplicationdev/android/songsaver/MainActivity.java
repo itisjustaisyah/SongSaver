@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 valid = false;
             }
             if(valid) {
-                db.insertSong(new Song (title, singers, year, stars));
+                db.insertSong(title, singers, year, stars);
                 Log.i("insert Main Activity", "inserted successfully");
                 Toast.makeText(this, "Inserted Song Successfully", Toast.LENGTH_SHORT).show();
             }

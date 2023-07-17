@@ -58,7 +58,7 @@ public class EditSongsActivity extends AppCompatActivity {
                 valid = false;
             }
             if(valid) {
-                if(dbh.updateSong(data ,new Song(title, singers, year, stars)) < 1){
+                if(dbh.updateSong(data, title, singers, year, stars) < 1){
                     Log.i("Edit Activity", "update unsuccessful");
 
                 }else{

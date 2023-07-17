@@ -19,7 +19,8 @@ public class Song implements Serializable {
     int year;
     int stars;
 
-    public Song(String title, String singers, int year, int stars) {
+    public Song(int id, String title, String singers, int year, int stars) {
+        this.id = id;
         this.title = title;
         this.singers = singers;
         this.year = year;
@@ -53,7 +54,7 @@ public class Song implements Serializable {
     public String starsToString(){
         StringBuilder string = new StringBuilder();
         for (int i = 0; i < stars; i++) {
-            string.append("*");
+            string.append("* ");
         }
         return string.toString();
     }
