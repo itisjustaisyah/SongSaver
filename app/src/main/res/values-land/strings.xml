@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="song_id">Song ID</string>
+    <string name="update">Update</string>
+    <string name="cancel">CANCEL</string>
+    <string name="delete">Delete</string>
+    <string name="_4">4</string>
+    <string name="show_all_songs_with_5_stars">SHOW ALL SONGS WITH 5 STARS</string>
+    <string name="back">BACK</string>
+    <string name="_2023">2023</string>
+</resources>
