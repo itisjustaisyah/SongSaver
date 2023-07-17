@@ -2,8 +2,6 @@ package com.myapplicationdev.android.songsaver;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -58,10 +56,6 @@ public class ShowSongListActivity extends AppCompatActivity {
                 al.addAll(dbh.getSongs(5));
 
                 dbh.close();
-                for (int i = 0; i < al.size(); i++) {
-                    al.get(i).setId(i);
-                    Log.i("song " + i, al.get(i).toString() + " " +al.get(i).getId());
-                }
                 aa.notifyDataSetChanged();
                 dbh.close();
                 Toast.makeText(ShowSongListActivity.this, "Five stars", Toast.LENGTH_SHORT).show();
@@ -85,9 +79,5 @@ public class ShowSongListActivity extends AppCompatActivity {
         al.addAll(dbh.getSongs());
         aa.notifyDataSetChanged();
         dbh.close();
-        for (int i = 0; i < al.size(); i++) {
-            al.get(i).id = i;
-            Log.i("song " + i, al.get(i).toString());
-        }
     }
 }
